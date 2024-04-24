@@ -23,9 +23,11 @@ jobs:
         run: |
           touch .env
           echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
-          echo PORT=${{secrets.PORT}} >> .env
-          echo SECRET=${{secrets.SECRET}} >> .env
-          echo TEST_MONGODB_URI=${{secrets.TEST_MONGODB_URI}} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo SECRET=${{ secrets.SECRET }} >> .env
+          echo TEST_MONGODB_URI=${{ secrets.TEST_MONGODB_URI }} >> .env
+      - name: Display env file
+        run: cat .env
       - name: run backend tests
         run: npm run test
       - name: run backend
