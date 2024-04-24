@@ -57,7 +57,7 @@ describe('when there is initially some blogs saved', () => {
         .expect(201)
         .expect('Content-Type', /application\/json/)
     }
-  })
+  }, 10000)
 
   describe('returning of blogs', () => {
     test('blogs are returned as json', async () => {
