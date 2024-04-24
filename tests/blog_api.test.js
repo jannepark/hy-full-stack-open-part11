@@ -47,7 +47,6 @@ describe('when there is initially some blogs saved', () => {
     }
 
     const login = await api.post('/api/login').send(user)
-    console.log('************', login.body)
     const token = login.body.token
 
     for (const blog of initialBlogs) {
