@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdHRpIiwiaWQiOiI2NjI4YjdmNjZiY2UwMTM0OGRkNDM4MjMiLCJpYXQiOjE3MTM5NDQ4MjIsImV4cCI6MTcxMzk0ODQyMn0.U_3u4xBpUXKcU7ke-xIqPhp7BrNC-1kzL3jYI2R9aic
+
+{
+    "title": "all the best blogs",
+    "author": "matti",
+    "url": "www.google.fi",
+    "likes": 10
+}

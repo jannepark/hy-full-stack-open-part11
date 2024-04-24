@@ -1,0 +1,9 @@
+PUT http://localhost:3002/api/blogs/64d5ded523ec06d181896ad7
+Content-Type: application/json
+
+{
+  "title": "taasuusiblogi",
+  "author": "kirjoittaja",
+  "url": "www.blogi0.fi",
+  "likes": "100"
+}
