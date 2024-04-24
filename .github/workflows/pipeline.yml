@@ -19,6 +19,13 @@ jobs:
       # - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Install backend dependencies
         run: npm install
+      - name: create env file
+        run: |
+          touch .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+          echo PORT=${{secrets.PORT}} >> .env
+          echo SECRET=${{secrets.SECRET}} >> .env
+          echo TEST_MONGODB_URI=${{secrets.TEST_MONGODB_URI}} >> .env
       - name: run backend tests
         run: npm run test
       - name: run backend
