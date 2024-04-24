@@ -1,6 +1,6 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdHRpIiwiaWQiOiI2NjI4YjdmNjZiY2UwMTM0OGRkNDM4MjMiLCJpYXQiOjE3MTM5NDQ4MjIsImV4cCI6MTcxMzk0ODQyMn0.U_3u4xBpUXKcU7ke-xIqPhp7BrNC-1kzL3jYI2R9aic
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hdHRpIiwiaWQiOiI2NjI4YjdmNjZiY2UwMTM0OGRkNDM4MjMiLCJpYXQiOjE3MTM5NDk4NzUsImV4cCI6MTcxMzk1MzQ3NX0.txoyBbPkTg7O0hYBTXsbZPoZf3Hs019pTbCBlavi2bs
 
 {
     "title": "all the best blogs",

@@ -16,13 +16,16 @@ const App = () => {
 
   const [notification, setNotification] = useState({
     message: null,
-    type: null
+    type: null,
   })
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )
+    // blogService.getAll().then(blogs =>
+    //   setBlogs(blogs)
+    // )
+    blogService.getAll().then((blogs) => {
+      setBlogs(Array.isArray(blogs) ? blogs : [])
+    })
   }, [])
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
@@ -38,12 +41,10 @@ const App = () => {
     try {
       const user = await loginService.login({
         username,
-        password
+        password,
       })
       blogService.setToken(user.token)
-      window.localStorage.setItem(
-        'loggedNoteappUser', JSON.stringify(user)
-      )
+      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
       setUser(user)
       setUsername('')
       setPassword('')
@@ -51,7 +52,7 @@ const App = () => {
       if (error.response.status === 401) {
         setNotification({
           message: `${error.response.data.error}`,
-          type: 'error'
+          type: 'error',
         })
         setTimeout(() => {
           setNotification({ message: null, type: null })
@@ -69,7 +70,9 @@ const App = () => {
   const handleLikeBlog = async (blogObject) => {
     try {
       await blogService.update(blogObject.id, blogObject)
-      const index = blogs.indexOf(blogs.find((blog) => blog.id === blogObject.id))
+      const index = blogs.indexOf(
+        blogs.find((blog) => blog.id === blogObject.id)
+      )
       const newBlogs = [...blogs]
       newBlogs[index].likes += 1
       setBlogs(newBlogs)
@@ -86,7 +89,7 @@ const App = () => {
       setBlogs(blogs.concat(returnedBlog))
       setNotification({
         message: `Created new blog ${blogObject.title}`,
-        type: 'notification'
+        type: 'notification',
       })
       setTimeout(() => {
         setNotification({ message: null, type: null })
@@ -95,7 +98,7 @@ const App = () => {
       if (error.response && error.response.status === 401) {
         setNotification({
           message: `${error.response.data.error}`,
-          type: 'error'
+          type: 'error',
         })
         setTimeout(() => {
           setNotification({ message: null, type: null })
@@ -123,7 +126,9 @@ const App = () => {
         <Notification notification={notification} />
         <div>
           {user.name} logged in
-          <button type="submit" onClick={handleLogout} id='logout'>logout</button>
+          <button type="submit" onClick={handleLogout} id="logout">
+            logout
+          </button>
         </div>
       </div>
       <h2>Create new</h2>
@@ -132,15 +137,16 @@ const App = () => {
       </Togglable>
       <div>
         {blogs
-          .sort(( i, j ) => j.likes - i.likes)
-          .map(blog =>
-            <Blog key={blog.id}
+          .sort((i, j) => j.likes - i.likes)
+          .map((blog) => (
+            <Blog
+              key={blog.id}
               blog={blog}
               user={user}
               setBlogs={setBlogs}
               handleLikeBlog={handleLikeBlog}
             />
-          )}
+          ))}
       </div>
     </>
   )
