@@ -28,11 +28,13 @@ jobs:
         #   echo "TEST_MONGODB_URI=$(echo '${{ secrets.TEST_MONGODB_URI }}' | base64 --decode)" >> .env
       - name: Display env file
         run: cat .env
-      # - name: Verify env file contents
-      #   run: |
-      #     echo "MONGODB_URI Length: $(echo -n ${{ secrets.MONGODB_URI }} | wc -c)"
-      #     echo "TEST_MONGODB_URI Length: $(echo -n ${{ secrets.TEST_MONGODB_URI }} | wc -c)"
-
+      - name: Verify env file contents
+        run: |
+          echo "MONGODB_URI Length: $(echo -n ${{ secrets.MONGODB_URI }} | wc -c)"
+          echo "TEST_MONGODB_URI Length: $(echo -n ${{ secrets.TEST_MONGODB_URI }} | wc -c)"
+          echo "PORT Length: $(echo -n ${{ secrets.PORT }} | wc -c)"
+      - name: run backend
+        run: npm run start
       - name: run backend tests
         run: npm run test
       - name: run backend
