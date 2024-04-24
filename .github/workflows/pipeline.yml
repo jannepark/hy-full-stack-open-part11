@@ -37,8 +37,8 @@ jobs:
       #   run: npm run start
       - name: run backend tests
         run: npm run test
-      - name: run backend
-        run: npm run start
+      - name: Start backend in background
+        run: npm run start & sleep 5 # Runs in background, waits for server to initialize
       - name: Install frontend dependencies
         run: cd frontend && npm install
       - name: test frontend
