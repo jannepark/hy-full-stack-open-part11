@@ -18,6 +18,8 @@ app.use(cors())
 app.use(express.json())
 app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
+app.use(express.static('public'))
+
 // app.use(middleware.userExtractor)
 app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
@@ -40,5 +42,12 @@ mongoose
   .catch((error) => {
     logger.error('error connecting to MongoDB:', error.message)
   })
+if (process.env.NODE_ENV !== 'test') {
+  const server = app.listen(config.PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${config.PORT}`)
+  })
 
+  // Export the server for testing purposes
+  module.exports = server
+}
 module.exports = app
