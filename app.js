@@ -42,7 +42,9 @@ mongoose
   .catch((error) => {
     logger.error('error connecting to MongoDB:', error.message)
   })
-if (process.env.NODE_ENV !== 'test') {
+// or development
+if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'development') {
+  console.log('why here')
   const server = app.listen(config.PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${config.PORT}`)
   })
