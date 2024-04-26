@@ -1,4 +1,7 @@
 module.exports = {
-  preset: 'react',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '^.+\\.svg$': 'jest-svg-transformer',
+    '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
+  },
 }
