@@ -20,7 +20,6 @@ app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
 app.use(express.static('public'))
 
-// app.use(middleware.userExtractor)
 app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
@@ -42,7 +41,6 @@ mongoose
   .catch((error) => {
     logger.error('error connecting to MongoDB:', error.message)
   })
-// or development
 if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'development') {
   console.log('why here')
   const server = app.listen(config.PORT, '0.0.0.0', () => {
