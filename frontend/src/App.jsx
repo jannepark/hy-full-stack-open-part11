@@ -20,9 +20,6 @@ const App = () => {
   })
 
   useEffect(() => {
-    // blogService.getAll().then(blogs =>
-    //   setBlogs(blogs)
-    // )
     blogService.getAll().then((blogs) => {
       setBlogs(Array.isArray(blogs) ? blogs : [])
     })
