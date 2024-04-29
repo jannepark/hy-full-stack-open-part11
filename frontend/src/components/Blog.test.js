@@ -1,11 +1,9 @@
-/* eslint-disable no-undef */
 import React from 'react'
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Blog from './Blog'
 import userEvent from '@testing-library/user-event'
 import BlogForm from './BlogForm'
-import { act } from 'react'
 
 describe('Blog', () => {
   test('renders title, author on default, but not url', () => {
@@ -44,13 +42,7 @@ describe('Blog', () => {
 
     const user = userEvent.setup()
     const button = screen.getByText('view')
-    // wrap in act to avoid warning
-
-    await act(async () => {
-      await user.click(button)
-    })
-    // await user.click(button)
-
+    await user.click(button)
     screen.getByText('www.osoite.fi', { exact: false })
     screen.getByText('99', { exact: false })
   })
@@ -77,13 +69,11 @@ describe('Blog', () => {
     const user = userEvent.setup()
 
     const buttonView = screen.getByText('view')
+    await user.click(buttonView)
 
-    await act(async () => {
-      await user.click(buttonView)
-      const buttonLike = screen.getByText('Like')
-      await user.click(buttonLike)
-      await user.click(buttonLike)
-    })
+    const buttonLike = screen.getByText('Like')
+    await user.click(buttonLike)
+    await user.click(buttonLike)
 
     expect(mockHandler).toBeCalledTimes(2)
   })
@@ -99,13 +89,12 @@ describe('test blogForm', () => {
     const authorInput = container.querySelector('#author-Input')
     const urlInput = container.querySelector('#url-Input')
     const sendButton = screen.getByText('create')
-    await act(async () => {
-      await user.type(titleInput, 'This is title')
-      await user.type(authorInput, 'This is author')
-      await user.type(urlInput, 'This is url')
 
-      await user.click(sendButton)
-    })
+    await user.type(titleInput, 'This is title')
+    await user.type(authorInput, 'This is author')
+    await user.type(urlInput, 'This is url')
+
+    await user.click(sendButton)
 
     expect(createBlog.mock.calls).toHaveLength(1)
     expect(createBlog.mock.calls[0][0].title).toBe('This is title')
